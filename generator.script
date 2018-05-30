@@ -1,0 +1,14 @@
+repeat with tvar from 1 to 200
+	tell application "iTerm"
+		activate
+		set myterm to (create window with default profile)
+		set myid to (get id of first window whose visible is true)
+		tell myterm
+			tell current session of myterm
+				write text "ssh-keygen -lvf /Users/dorianlenzner/Documents/playing_with_sshkeys/" & tvar & ".pub"
+			end tell
+			delay 1
+			do shell script "screencapture -o -l" & myid & " '/Users/dorianlenzner/Documents/playing_with_sshkeys/images/" & tvar & ".png'"
+		end tell
+	end tell
+end repeat
